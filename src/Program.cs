@@ -1,4 +1,5 @@
 using DynamicWorkflow.Core;
+using DynamicWorkflow.Store;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +43,7 @@ app.MapGet("/workflow/{id}", (string id, DefinitionStore store) =>
 });
 
 // Start a workflow given ID
-app.MapPost("/workflow/{id}/start", (DefinitionStore definitionStore, InstanceStore instanceStore) =>
+app.MapPost("/workflow/{id}/start", (string id, DefinitionStore definitionStore, InstanceStore instanceStore) =>
 {
     var definition = definitionStore.Get(id);
 
@@ -55,7 +56,7 @@ app.MapPost("/workflow/{id}/start", (DefinitionStore definitionStore, InstanceSt
     {
         Id = Guid.NewGuid().ToString(),
         DefinitionId = id,
-        CurrentState = initialState.Id,
+        CurrentState = initialState,
     };
 
     instanceStore.Save(instance);
@@ -64,7 +65,7 @@ app.MapPost("/workflow/{id}/start", (DefinitionStore definitionStore, InstanceSt
 });
 
 // Retrieve instance state and history
-app.MapGet("/instance/{id}", (InstanceStore store) => 
+app.MapGet("/instance/{id}", (string id, InstanceStore store) => 
 {
     var instance = store.Get(id);
 
@@ -74,7 +75,7 @@ app.MapGet("/instance/{id}", (InstanceStore store) =>
 });
 
 // Execute an action
-app.MapPost("/instance/{id}/action", (string actionId, DefinitionStore definitionStore, InstanceStore instanceStore) => 
+app.MapPost("/instance/{id}/action", (string id, string actionId, DefinitionStore definitionStore, InstanceStore instanceStore) => 
 {
     var instance = instanceStore.Get(id);
     
@@ -82,13 +83,13 @@ app.MapPost("/instance/{id}/action", (string actionId, DefinitionStore definitio
         return Results.NotFound();
 
     var definition = definitionStore.Get(instance.DefinitionId);
-    var currentState = definition.States.FirstOrDefault(s => s.Id == instance.CurrentState);
-    var action = currentState.Actions.FirstOrDefault(a => a.Id == actionId);
+    var currentState = definition.States.FirstOrDefault(s => s.Id == instance.CurrentState.Id);
+    var action = definition.Actions.FirstOrDefault(a => a.Id == actionId && a.Enabled && a.FromStates.Contains(currentState.Id));
 
     if(action is null)
         return Results.BadRequest();
 
-    instance.CurrentState = action.TargetState;
+    instance.CurrentState = definition.States.FirstOrDefault(s => s.Id == action.ToState);
 
     instanceStore.Save(instance);
 

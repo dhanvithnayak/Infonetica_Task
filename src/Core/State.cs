@@ -2,8 +2,8 @@
 
 public class State
 {
-    string Id;
-    bool IsInitial;
+    public string Id;
+    public bool IsInitial;
     bool IsFinal;
     bool Enabled;
 }

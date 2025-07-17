@@ -2,7 +2,7 @@
 
 public class Definition
 {
-    string Id;
-    List<State> States;
-    List<Action> Actions;
+    public string Id;
+    public List<State> States;
+    public List<Action> Actions;
 }

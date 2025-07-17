@@ -2,8 +2,8 @@
 
 public class Action
 {
-    string Id;
-    string ToState;
-    List<string> FromStates;
-    bool Enabled;
+    public string Id;
+    public string ToState;
+    public List<string> FromStates;
+    public bool Enabled;
 }

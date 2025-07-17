@@ -2,8 +2,8 @@
 
 public class Instance
 {
-    string Id;
-    string DefinitionId;
-    State CurrentState;
+    public string Id;
+    public string DefinitionId;
+    public State CurrentState;
     List<Record> History;
 }
