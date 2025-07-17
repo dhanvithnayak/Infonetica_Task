@@ -6,14 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<DefinitionStore>();
+builder.Services.AddSingleton<InstanceStore>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Ideally, we only need to enable Swagger in dev mode
+// I've enabled Swagger for all builds for convenience
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // The API endpoints below can be moved into an Endpoints subfolder for better structuring
 // but since our API is very minimal, I'll go ahead with writing it inline here
