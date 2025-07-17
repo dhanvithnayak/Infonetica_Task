@@ -21,7 +21,7 @@ app.MapPost("/workflow", (Definition definition, DefinitionStore store) =>
 {
     try
     {
-        definition.Validate();
+        // definition.Validate();
         store.Save(definition);
         return Results.Ok();
     }

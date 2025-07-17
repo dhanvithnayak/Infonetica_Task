@@ -1,4 +1,6 @@
-﻿namespace DynamicWorkflow.Store;
+﻿using DynamicWorkflow.Core;
+
+namespace DynamicWorkflow.Store;
 
 public class InstanceStore
 {
