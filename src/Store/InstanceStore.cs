@@ -1,0 +1,17 @@
+﻿namespace DynamicWorkflow.Store;
+
+public class InstanceStore
+{
+    Dictionary<string, Definition> instances;
+
+    public void Save(Instance instance)
+    {
+        instances[instance.Id] = instance;
+    }
+
+    public Instance? Get(string id)
+    {
+        instances.TryGetValue(id, out var instance);
+        return instance;
+    }
+}
