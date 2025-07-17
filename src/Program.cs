@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using DynamicWorkflow.Core;
 using DynamicWorkflow.Store;
 
@@ -22,11 +23,11 @@ app.MapPost("/workflow", (Definition definition, DefinitionStore store) =>
 {
     try
     {
-        // definition.Validate();
+        definition.Validate();
         store.Save(definition);
         return Results.Ok();
     }
-    catch (System.Exception ex)
+    catch (ValidationException ex)
     {
         return Results.BadRequest(new { error = ex.Message });
     }
