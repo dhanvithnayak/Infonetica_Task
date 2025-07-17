@@ -80,4 +80,37 @@ localhost:5000/swagger
   <img width="80%" alt="image" src="https://github.com/user-attachments/assets/238fcf31-8a25-4ab2-9992-fb1987e1ba0a">
 </div>
 
+## Endpoints
+
+1. `POST /workflow`: Create new workflow definition
+   
+    Below is a demo payload
+   ```json
+   {
+     "id": "leave-request",
+     "states": [
+       {
+         "id": "draft",
+         "isInitial": true,
+         "actions": [
+           { "id": "submit", "targetState": "manager_review" }
+          ]
+        },
+       {
+         "id": "manager_review",
+         "actions": [
+           { "id": "approve", "targetState": "approved" },
+           { "id": "reject", "targetState": "rejected" }
+         ]
+       },
+         { "id": "approved", "isFinal": true },
+         { "id": "rejected", "isFinal": true }
+     ]
+   }
+    ```
+2. `GET /workflow/{id}`: Get workflow details given definition ID
+3. `POST /workflow/{id}/start`: Starts instance of given definition ID
+4. `GET /instance/{id}`: Get instance details given instance ID
+5. `POST /instance/{id}/action`: Run an action on given instance ID
+
 <p align="right">(<a href="#top">back to top</a>)</p>
