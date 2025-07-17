@@ -11,6 +11,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// The API endpoints below can be moved into an Endpoints subfolder for better structuring
+// but since our API is very minimal, I'll go ahead with writing it inline here
+
 // Create a new workflow in one go
 app.MapPost("/workflow", () => {});
 // Get a workflow configuration
