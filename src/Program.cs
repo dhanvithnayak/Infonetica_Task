@@ -17,12 +17,12 @@ if (app.Environment.IsDevelopment())
 // but since our API is very minimal, I'll go ahead with writing it inline here
 
 // Create a new workflow in one go
-app.MapPost("/workflow", (Definition definition) =>
+app.MapPost("/workflow", (Definition definition, DefinitionStore store) =>
 {
     try
     {
-        definition.Validate();  // TODO
-        // TODO save in store
+        definition.Validate();
+        store.Save(definition);
         return Results.Ok();
     }
     catch (System.Exception ex)
@@ -32,10 +32,9 @@ app.MapPost("/workflow", (Definition definition) =>
 });
 
 // Get a workflow configuration
-app.MapGet("/workflow/{id}", (string id) =>
+app.MapGet("/workflow/{id}", (string id, DefinitionStore store) =>
 {
-    // TODO get from store
-    // var definition = <getfromstore>
+    var definition = store.Get(id);
     
     return definition is not null
         ? Results.Ok(definition)
@@ -43,32 +42,31 @@ app.MapGet("/workflow/{id}", (string id) =>
 });
 
 // Start a workflow given ID
-app.MapPost("/workflow/{id}/start", () =>
+app.MapPost("/workflow/{id}/start", (DefinitionStore definitionStore, InstanceStore instanceStore) =>
 {
-    // TODO get definition from store
-    // var definition = <getfromstore>
-    
+    var definition = definitionStore.Get(id);
+
     if(definition is null)
         return Results.NotFound();
 
-    var initial_state = definition.States.FirstOrDefault(s => s.IsInitial);
+    var initialState = definition.States.FirstOrDefault(s => s.IsInitial);
 
     var instance = new Instance
     {
         Id = Guid.NewGuid().ToString(),
         DefinitionId = id,
-        CurrentState = initial_state.Id,
+        CurrentState = initialState.Id,
     };
 
-    // TODO store Instance
+    instanceStore.Save(instance);
     
     return Results.Created($"/instance/{instance.Id}", instance);
 });
 
 // Retrieve instance state and history
-app.MapGet("/instance/{id}", () => 
+app.MapGet("/instance/{id}", (InstanceStore store) => 
 {
-    // TODO get instance from store
+    var instance = store.Get(id);
 
     return instance is not null
         ? Results.Ok(instance)
@@ -76,24 +74,23 @@ app.MapGet("/instance/{id}", () =>
 });
 
 // Execute an action
-app.MapPost("/instance/{id}/action", (string action_id) => 
+app.MapPost("/instance/{id}/action", (string actionId, DefinitionStore definitionStore, InstanceStore instanceStore) => 
 {
-    // TODO get instance from store
-    // var instance = loremepsum
+    var instance = instanceStore.Get(id);
     
     if(instance is null)
         return Results.NotFound();
 
-    // TODO get definition
-    // var definition =
-    
+    var definition = definitionStore.Get(instance.DefinitionId);
     var currentState = definition.States.FirstOrDefault(s => s.Id == instance.CurrentState);
+    var action = currentState.Actions.FirstOrDefault(a => a.Id == actionId);
 
-    var action = currentState.Actions.FirstOrDefault(a => a.Id == action_id);
     if(action is null)
         return Results.BadRequest();
 
-    // TODO save instance
+    instance.CurrentState = action.TargetState;
+
+    instanceStore.Save(instance);
 
     return Results.Ok(instance);
 });
