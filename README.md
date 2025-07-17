@@ -2,8 +2,8 @@
 
 <!-- UPDATE -->
 <div align="center">
-  <a href="https://github.com/metakgp/PROJECT_NAME">
-     <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/black-large.jpg">
+  <a href="">
+     <img width="140" alt="image" src="">
   </a>
 
   <h3 align="center">Dynamic Workflows</h3>
