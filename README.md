@@ -77,7 +77,7 @@ localhost:5000/swagger
 ```
 
 <div align="center">
-  <img width="80%" alt="image" src="">
+  <img width="80%" alt="image" src="https://github.com/user-attachments/assets/238fcf31-8a25-4ab2-9992-fb1987e1ba0a">
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
