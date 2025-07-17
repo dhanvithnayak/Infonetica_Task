@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicWorkflow", "src\DynamicWorkflow.csproj", "{2463134E-ECD2-43A3-8D34-AAFA1EE0B5ED}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2BCA583A-9E7C-475F-BBF1-5999ABBFA1B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicWorkflow.Core", "src\Core\DynamicWorkflow.Core.csproj", "{0E4AE867-1B45-47B3-800C-19FE7D97D619}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +34,20 @@ Global
 		{2463134E-ECD2-43A3-8D34-AAFA1EE0B5ED}.Release|x64.Build.0 = Release|Any CPU
 		{2463134E-ECD2-43A3-8D34-AAFA1EE0B5ED}.Release|x86.ActiveCfg = Release|Any CPU
 		{2463134E-ECD2-43A3-8D34-AAFA1EE0B5ED}.Release|x86.Build.0 = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|x64.Build.0 = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Debug|x86.Build.0 = Debug|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|x64.ActiveCfg = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|x64.Build.0 = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|x86.ActiveCfg = Release|Any CPU
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E4AE867-1B45-47B3-800C-19FE7D97D619} = {2BCA583A-9E7C-475F-BBF1-5999ABBFA1B4}
 	EndGlobalSection
 EndGlobal
