@@ -50,7 +50,7 @@ app.MapPost("/workflow/{id}/start", (string id, DefinitionStore definitionStore,
     if(definition is null)
         return Results.NotFound();
 
-    var initialState = definition.States.FirstOrDefault(s => s.IsInitial);
+    var initialState = definition.States.FirstOrDefault(s => s.IsInitial)!;
 
     var instance = new Instance
     {
@@ -83,13 +83,13 @@ app.MapPost("/instance/{id}/action", (string id, string actionId, DefinitionStor
         return Results.NotFound();
 
     var definition = definitionStore.Get(instance.DefinitionId);
-    var currentState = definition.States.FirstOrDefault(s => s.Id == instance.CurrentState.Id);
-    var action = definition.Actions.FirstOrDefault(a => a.Id == actionId && a.Enabled && a.FromStates.Contains(currentState.Id));
+    var currentState = definition.States.FirstOrDefault(s => s.Id == instance.CurrentState.Id)!;
+    var action = definition.Actions.FirstOrDefault(a => a.Id == actionId && a.Enabled && a.FromStates.Contains(currentState.Id))!;
 
     if(action is null)
         return Results.BadRequest();
 
-    instance.CurrentState = definition.States.FirstOrDefault(s => s.Id == action.ToState);
+    instance.CurrentState = definition.States.FirstOrDefault(s => s.Id == action.ToState)!;
 
     instanceStore.Save(instance);
 

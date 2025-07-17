@@ -4,7 +4,7 @@ namespace DynamicWorkflow.Store;
 
 public class InstanceStore
 {
-    Dictionary<string, Instance> instances;
+    Dictionary<string, Instance> instances = new();
 
     public void Save(Instance instance)
     {

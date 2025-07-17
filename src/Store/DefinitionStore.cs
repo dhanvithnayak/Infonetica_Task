@@ -4,7 +4,7 @@ namespace DynamicWorkflow.Store;
 
 public class DefinitionStore
 {
-    Dictionary<string, Definition> definitions;
+    Dictionary<string, Definition> definitions = new();
 
     public void Save(Definition definition)
     {
