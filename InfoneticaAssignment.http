@@ -1,0 +1,6 @@
+@InfoneticaAssignment_HostAddress = http://localhost:5179
+
+GET {{InfoneticaAssignment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
