@@ -4,6 +4,6 @@ public class Instance
 {
     string Id;
     string DefinitionId;
-    state CurrentState;
+    State CurrentState;
     List<Record> History;
 }
