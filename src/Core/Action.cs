@@ -9,7 +9,8 @@ public class Action
     public List<string> FromStates = new();
     public bool Enabled;
 
-    public void Validate(HashSet<string> validStateIds) {
+    public void Validate(HashSet<string> validStateIds)
+    {
         if(string.IsNullOrWhiteSpace(Id))
             throw new ValidationException("Action ID necessary");
 
