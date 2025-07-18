@@ -54,7 +54,7 @@ The following dependencies are required to be installed for the project to funct
 2. Run local instance
    
    ```
-   cd Infonetica_Task
+   cd Infonetica_Task/src
    dotnet run
    ```
 
@@ -87,24 +87,24 @@ localhost:5000/swagger
     Below is a demo payload
    ```json
    {
-     "id": "leave-request",
+     "id": "1",
      "states": [
        {
-         "id": "draft",
+         "id": "1",
          "isInitial": true,
          "actions": [
-           { "id": "submit", "targetState": "manager_review" }
+           { "id": "1", "targetState": "INIT_STATE" }
           ]
         },
        {
-         "id": "manager_review",
+         "id": "2",
          "actions": [
-           { "id": "approve", "targetState": "approved" },
-           { "id": "reject", "targetState": "rejected" }
+           { "id": "2", "targetState": "STATE2" },
+           { "id": "3", "targetState": "STATE3" }
          ]
        },
-         { "id": "approved", "isFinal": true },
-         { "id": "rejected", "isFinal": true }
+         { "id": "3", "isFinal": true },
+         { "id": "4", "isFinal": true }
      ]
    }
     ```
