@@ -91,6 +91,13 @@ app.MapPost("/instance/{id}/action", (string id, string actionId, DefinitionStor
     if(action is null)
         return Results.BadRequest();
 
+    instance.History.Add(new Record 
+    {
+        PrevStateId = currentState.Id,
+        ActionId = actionId,
+        Timestamp = DateTime.UtcNow
+    });
+
     instance.CurrentState = definition.States.FirstOrDefault(s => s.Id == action.ToState)!;
 
     instanceStore.Save(instance);

@@ -5,5 +5,5 @@ public class Instance
     public string Id;
     public string DefinitionId;
     public State CurrentState;
-    List<Record> History = new();
+    public List<Record> History = new();
 }

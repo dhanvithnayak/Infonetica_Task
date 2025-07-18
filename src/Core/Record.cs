@@ -2,6 +2,7 @@
 
 public class Record
 {
-    string ActionId;
-    DateTime Timestamp;
+    public string PrevStateId;
+    public string ActionId;
+    public DateTime Timestamp;
 }
